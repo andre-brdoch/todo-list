@@ -6,7 +6,6 @@
       placeholder="Add new task"
       :style="
         `
-        --background-color: ${backgroundColor};
         --text-color: ${textColor};
         --border-color: ${borderColor};
       `
@@ -30,9 +29,6 @@ export default {
   computed: {
     color() {
       return this.$store.state.color;
-    },
-    backgroundColor() {
-      return this.color;
     },
     borderColor() {
       return lightenColor(this.color);
@@ -58,25 +54,14 @@ export default {
 
 <style scoped lang="scss">
 .input {
+  @include inputField();
   padding: 0.75rem 0;
-  font-family: $font-family;
   font-size: $font-size-task;
-  transition: all 0.2s ease-in-out;
-  transition-property: background-color, border-color, color;
-  background-color: var(--background-color);
   color: var(--text-color);
-  border: none;
-  border-bottom: 3px solid var(--border-color);
+  border-color: var(--border-color);
 
-  &:focus {
-    outline: none;
-  }
   &::placeholder {
     color: var(--text-color);
-    opacity: 1;
-  }
-  &:focus::placeholder {
-    color: transparent;
   }
 }
 </style>

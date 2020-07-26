@@ -1,5 +1,8 @@
 <template>
-  <div class="heading-ctn">
+  <div
+    class="heading-ctn"
+    :style="`--text-color: ${textColor}; --border-color: ${borderColor};`"
+  >
     <form v-show="inputIsVisible" @submit.prevent="updateHeading" class="form">
       <input
         v-model="newHeading"
@@ -12,7 +15,6 @@
       v-show="!inputIsVisible"
       @click="showInput"
       @focus="showInput"
-      :style="`color: ${textColor};`"
       class="heading"
     >
       {{ heading }}
@@ -21,7 +23,7 @@
 </template>
 
 <script>
-import { darkenColor } from "utils/colors";
+import { lightenColor, darkenColor } from "utils/colors";
 
 export default {
   data() {
@@ -35,8 +37,14 @@ export default {
     heading() {
       return this.$store.state.name;
     },
+    color() {
+      return this.$store.state.color;
+    },
+    borderColor() {
+      return lightenColor(this.color);
+    },
     textColor() {
-      return darkenColor(this.$store.state.color);
+      return darkenColor(this.color);
     }
   },
 
@@ -64,10 +72,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$_fontSize: 2rem;
+
 .heading {
-  font-size: 2rem;
+  font-size: $_fontSize;
+  font-weight: bold;
   margin: 0;
-  padding: 0;
+  padding: 0 0 $input-padding-bottom;
+  border-bottom: 3px solid transparent;
   transition: color 0.2s ease-in-out;
+  color: var(--text-color);
+}
+.input {
+  @include inputField();
+  font-size: $_fontSize;
+  font-weight: bold;
+  color: var(--text-color);
+  border-color: var(--border-color);
+
+  &::placeholder {
+    color: var(--text-color);
+  }
 }
 </style>

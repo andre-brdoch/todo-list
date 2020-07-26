@@ -1,0 +1,19 @@
+@mixin inputField() {
+  padding: 0 0 $input-padding-bottom;
+  font-family: $font-family;
+  transition: all 0.2s ease-in-out;
+  transition-property: border-color, color;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid;
+
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    opacity: 1;
+  }
+  &:focus::placeholder {
+    color: transparent;
+  }
+}

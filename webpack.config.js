@@ -15,6 +15,7 @@ module.exports = {
       components: path.resolve(__dirname, "src/components"),
       icons: path.resolve(__dirname, "assets/icons"),
       store: path.resolve(__dirname, "src/store"),
+      utils: path.resolve(__dirname, "src/utils"),
       vue: "vue/dist/vue.esm.js"
     }
   },

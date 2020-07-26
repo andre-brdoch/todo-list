@@ -21,6 +21,6 @@ export default {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.07);
   // stretch content:
   display: grid;
-  transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-in-out;
 }
 </style>

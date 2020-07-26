@@ -18,7 +18,7 @@
 
 <script>
 import kebabCase from "lodash/kebabcase";
-import tinycolor from "tinycolor2";
+import { lightenColor, darkenColor } from "utils/colors";
 
 export default {
   data() {
@@ -35,10 +35,10 @@ export default {
       return this.color;
     },
     borderColor() {
-      return tinycolor(this.color).lighten(15);
+      return lightenColor(this.color);
     },
     textColor() {
-      return tinycolor(this.color).darken(35);
+      return darkenColor(this.color);
     }
   },
 

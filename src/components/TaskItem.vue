@@ -1,7 +1,9 @@
 <template>
   <div class="ctn">
     <input type="checkbox" :id="text" class="checkbox" />
-    <label :for="text" class="task-text">{{ text }}</label>
+    <label :for="text" :style="`color: ${textColor};`" class="task-text">{{
+      text
+    }}</label>
     <img
       @click="$store.commit('deleteTaskAtIndex', i)"
       class="delete-item-btn"
@@ -13,6 +15,7 @@
 
 <script>
 import closeIcon from "icons/close.svg";
+import { darkenColor } from "utils/colors";
 
 export default {
   props: {
@@ -24,6 +27,12 @@ export default {
     return {
       closeIcon
     };
+  },
+
+  computed: {
+    textColor() {
+      return darkenColor(this.$store.state.color);
+    }
   }
 };
 </script>
@@ -47,6 +56,7 @@ export default {
   font-size: $font-size-task;
   color: $font-color-task;
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
 }
 .delete-item-btn {
   position: absolute;

@@ -12,6 +12,7 @@
       v-show="!inputIsVisible"
       @click="showInput"
       @focus="showInput"
+      :style="`color: ${textColor};`"
       class="heading"
     >
       {{ heading }}
@@ -20,6 +21,8 @@
 </template>
 
 <script>
+import { darkenColor } from "utils/colors";
+
 export default {
   data() {
     return {
@@ -31,6 +34,9 @@ export default {
   computed: {
     heading() {
       return this.$store.state.name;
+    },
+    textColor() {
+      return darkenColor(this.$store.state.color);
     }
   },
 
@@ -62,5 +68,6 @@ export default {
   font-size: 2rem;
   margin: 0;
   padding: 0;
+  transition: color 0.2s ease-in-out;
 }
 </style>

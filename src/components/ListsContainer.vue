@@ -1,6 +1,6 @@
 <template>
   <ul class="lists-container">
-    <li v-for="(item, i) in lists" :key="Date.now()" class="li">
+    <li v-for="(item, i) in lists" :key="item.id" class="li">
       <todo-list
         v-on:list-deleted="removeItemAtIndex(i)"
         :name="item.name"
@@ -17,6 +17,7 @@
 <script>
 import CardComponent from "./CardComponent.vue";
 import TodoList from "./TodoList.vue";
+import kebabCase from "lodash/kebabcase";
 
 export default {
   name: "ListsContainer",
@@ -29,7 +30,10 @@ export default {
 
   methods: {
     addItem() {
-      this.lists.push({ name: "New Todo List" });
+      this.lists.push({
+        name: "New Todo List",
+        id: kebabCase("list-" + Date.now())
+      });
     },
     removeItemAtIndex(i) {
       this.lists.splice(i, 1);

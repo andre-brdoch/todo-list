@@ -2,7 +2,7 @@
   <CardComponent :color="$store.state.color">
     <TodoHeader />
     <ul class="list">
-      <li v-for="(task, i) in tasks" :key="task.text" class="task-ctn">
+      <li v-for="(task, i) in tasks" :key="task.id" class="task-ctn">
         <TaskItem :text="task.text" :i="i" />
       </li>
       <li class="task create-task">

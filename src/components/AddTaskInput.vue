@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import kebabCase from "lodash/kebabcase";
+
 export default {
   data() {
     return {
@@ -20,7 +22,10 @@ export default {
   methods: {
     addItem() {
       if (this.newTask.length === 0) return;
-      const task = { text: this.newTask };
+      const task = {
+        text: this.newTask,
+        id: kebabCase(this.newTask + Date.now())
+      };
       this.$store.commit("addTask", task);
       this.newTask = "";
     }

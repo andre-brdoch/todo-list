@@ -34,6 +34,16 @@ export default {
   computed: {
     tasks() {
       return this.$store.state.tasks;
+    },
+    isDeleted() {
+      return this.$store.state.isDeleted;
+    }
+  },
+
+  watch: {
+    isDeleted() {
+      this.$emit("list-deleted", true);
+      this.$destroy();
     }
   },
 

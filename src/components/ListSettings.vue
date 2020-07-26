@@ -2,6 +2,11 @@
   <div v-if="isVisible" class="list-settings">
     <ul class="list">
       <li class="setting">
+        <span @click="$store.commit('deleteList')" class="setting-text"
+          >Delete list</span
+        >
+      </li>
+      <li class="setting">
         <span
           @click.stop="$store.commit('toggleColorPickerVisibility')"
           class="setting-text"
@@ -55,7 +60,6 @@ export default {
   padding: 1.5rem;
   background-color: white;
   border-radius: 3px;
-  text-align: right;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.07);
 }
 .setting-text {

@@ -1,7 +1,10 @@
 <template>
   <ul class="lists-container">
-    <li v-for="(item, i) in lists" :key="i" class="li">
-      <todo-list :name="item.name"></todo-list>
+    <li v-for="(item, i) in lists" :key="Date.now()" class="li">
+      <todo-list
+        v-on:list-deleted="removeItemAtIndex(i)"
+        :name="item.name"
+      ></todo-list>
     </li>
     <li class="li">
       <CardComponent color="lightgrey">
@@ -27,6 +30,9 @@ export default {
   methods: {
     addItem() {
       this.lists.push({ name: "New Todo List" });
+    },
+    removeItemAtIndex(i) {
+      this.lists.splice(i, 1);
     }
   }
 };

@@ -5,7 +5,8 @@ const state = {
   tasks: [],
   settingsAreOpen: false,
   color: colors[0],
-  colorPickerIsVisible: false
+  colorPickerIsVisible: false,
+  isDeleted: false
 };
 
 const mutations = {
@@ -32,6 +33,9 @@ const mutations = {
   },
   hideColorPicker(state) {
     state.colorPickerIsVisible = false;
+  },
+  deleteList(state) {
+    state.isDeleted = true;
   }
 };
 

@@ -1,5 +1,5 @@
 <template>
-  <article class="todo">
+  <CardComponent color="#fad872">
     <todo-heading :name="name"></todo-heading>
     <ul class="list">
       <li v-for="(item, i) in list" :key="item.text" class="task">
@@ -18,16 +18,17 @@
         </form>
       </li>
     </ul>
-  </article>
+  </CardComponent>
 </template>
 
 <script>
+import CardComponent from "./CardComponent.vue";
 import TodoHeading from "./TodoHeading.vue";
 
 export default {
   name: "TodoList",
 
-  components: { TodoHeading },
+  components: { CardComponent, TodoHeading },
 
   props: {
     name: { type: String, default: "" },
@@ -60,13 +61,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.todo {
-  padding: 1.5rem;
-  background-color: #fad872;
-  border-radius: 3px;
-  max-width: 40rem;
-}
-
 .list {
   list-style: none;
   margin: 0;

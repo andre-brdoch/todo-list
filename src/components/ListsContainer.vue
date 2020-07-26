@@ -1,21 +1,24 @@
 <template>
   <ul class="lists-container">
-    <li v-for="(item, i) in lists" :key="i">
+    <li v-for="(item, i) in lists" :key="i" class="li">
       <todo-list :name="item.name"></todo-list>
     </li>
-    <li>
-      <div @click.stop="addItem" class="add-btn">+</div>
+    <li class="li">
+      <CardComponent color="lightgrey">
+        <div @click.stop="addItem" class="add-btn">+</div>
+      </CardComponent>
     </li>
   </ul>
 </template>
 
 <script>
+import CardComponent from "./CardComponent.vue";
 import TodoList from "./TodoList.vue";
 
 export default {
   name: "ListsContainer",
 
-  components: { TodoList },
+  components: { CardComponent, TodoList },
 
   data() {
     return { lists: [] };
@@ -38,13 +41,15 @@ export default {
   margin: 0;
   padding: 0;
 }
+.li {
+  min-height: 10rem;
+  // stretch content
+  display: grid;
+}
 .add-btn {
-  background-color: lightgrey;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 8rem;
-  border-radius: 3px;
   cursor: pointer;
   font-size: 3rem;
   font-weight: bold;

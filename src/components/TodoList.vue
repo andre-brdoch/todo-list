@@ -11,7 +11,12 @@
       </li>
       <li class="task create-task">
         <form @submit.prevent.stop="addItem" class="form">
-          <input v-model="newTask" placeholder="Add new task" class="input" />
+          <input
+            v-model="newTask"
+            @blur.stop="addItem"
+            placeholder="Add new task"
+            class="input"
+          />
         </form>
       </li>
     </ul>

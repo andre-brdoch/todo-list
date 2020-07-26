@@ -5,7 +5,12 @@
       <li v-for="(item, i) in list" :key="item.text" class="task-ctn">
         <input type="checkbox" :id="item.text" class="checkbox" />
         <label :for="item.text" class="task-text">{{ item.text }}</label>
-        <span @click.stop="deleteItem(i)" class="delete-item-btn">&cross;</span>
+        <img
+          @click.stop="deleteItem(i)"
+          class="delete-item-btn"
+          :src="closeIcon"
+          alt="delete task"
+        />
       </li>
       <li class="task create-task">
         <form @submit.prevent.stop="addItem" class="item-form">
@@ -23,10 +28,11 @@
 </template>
 
 <script>
-import CardComponent from "./CardComponent.vue";
-import TodoFooter from "./TodoFooter.vue";
-import TodoHeading from "./TodoHeading.vue";
+import CardComponent from "components/CardComponent.vue";
+import TodoFooter from "components/TodoFooter.vue";
+import TodoHeading from "components/TodoHeading.vue";
 import { colors } from "../colors";
+import closeIcon from "icons/close.svg";
 
 export default {
   name: "TodoList",
@@ -46,7 +52,8 @@ export default {
   data() {
     return {
       newTask: "",
-      color: colors[0]
+      color: colors[0],
+      closeIcon
     };
   },
 
@@ -96,9 +103,7 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  width: 1.5rem;
   padding: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 </style>

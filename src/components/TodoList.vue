@@ -1,6 +1,22 @@
 <template>
   <CardComponent :color="color">
-    <todo-heading :name="name"></todo-heading>
+    <header class="header">
+      <todo-heading :name="name"></todo-heading>
+      <div class="settings-wrapper">
+        <img
+          @click.stop="toggleSettings"
+          class="settings-btn"
+          :src="settingsIcon"
+          alt="open settings"
+        />
+        <div class="settings">
+          <list-settings
+            v-on:color-change="changeColor"
+            :areOpen="settingsAreOpen"
+          />
+        </div>
+      </div>
+    </header>
     <ul class="list">
       <li v-for="(item, i) in list" :key="item.text" class="task-ctn">
         <input type="checkbox" :id="item.text" class="checkbox" />
@@ -23,21 +39,21 @@
         </form>
       </li>
     </ul>
-    <TodoFooter v-on:color-change="changeColor"></TodoFooter>
   </CardComponent>
 </template>
 
 <script>
 import CardComponent from "components/CardComponent.vue";
-import TodoFooter from "components/TodoFooter.vue";
+import ListSettings from "components/ListSettings.vue";
 import TodoHeading from "components/TodoHeading.vue";
 import { colors } from "../colors";
 import closeIcon from "icons/close.svg";
+import settingsIcon from "icons/options_hori.svg";
 
 export default {
   name: "TodoList",
 
-  components: { CardComponent, TodoFooter, TodoHeading },
+  components: { CardComponent, ListSettings, TodoHeading },
 
   props: {
     name: { type: String, default: "" },
@@ -53,7 +69,9 @@ export default {
     return {
       newTask: "",
       color: colors[0],
-      closeIcon
+      settingsAreOpen: false,
+      closeIcon,
+      settingsIcon
     };
   },
 
@@ -69,12 +87,35 @@ export default {
     },
     changeColor(color) {
       this.color = color;
+    },
+    toggleSettings() {
+      this.settingsAreOpen = !this.settingsAreOpen;
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
+$_iconSize: 2rem;
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 2rem;
+  grid-gap: 3rem;
+  padding-bottom: 1.5rem;
+}
+.settings-wrapper {
+  position: relative;
+}
+.settings-btn {
+  width: $_iconSize;
+  cursor: pointer;
+}
+.settings {
+  position: absolute;
+  top: $_iconSize + 1rem;
+  right: 0;
+}
 .list {
   list-style: none;
   margin: 0;

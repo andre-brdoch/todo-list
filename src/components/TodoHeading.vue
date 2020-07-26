@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <div class="heading-ctn">
     <form v-show="inputIsVisible" @submit.prevent="updateHeading" class="form">
       <input
         v-model="heading"
@@ -16,7 +16,7 @@
     >
       {{ heading }}
     </h3>
-  </header>
+  </div>
 </template>
 
 <script>
@@ -56,9 +56,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.header {
-  padding-bottom: 1.5rem;
-}
 .heading {
   font-size: 2rem;
   margin: 0;

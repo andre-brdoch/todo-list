@@ -1,7 +1,25 @@
 <template>
   <article class="todo">
     <header class="header">
-      <h3 class="heading">{{ name }}</h3>
+      <form
+        v-if="showHeadingInput"
+        @submit.prevent="showHeadingInput = false"
+        class="heading-form"
+      >
+        <input
+          v-model="heading"
+          @blur="showHeadingInput = false"
+          class="heading-input"
+        />
+      </form>
+      <h3
+        v-else
+        @click.stop="showHeadingInput = true"
+        @focus.stop="showHeadingInput = true"
+        class="heading"
+      >
+        {{ name }}
+      </h3>
     </header>
     <ul class="list">
       <li v-for="(item, i) in list" :key="item.text" class="task">
@@ -10,12 +28,12 @@
         <span @click.stop="deleteItem(i)" class="delete-item-btn">x</span>
       </li>
       <li class="task create-task">
-        <form @submit.prevent.stop="addItem" class="form">
+        <form @submit.prevent.stop="addItem" class="item-form">
           <input
             v-model="newTask"
-            @blur.stop="addItem"
+            @blur="addItem"
             placeholder="Add new task"
-            class="input"
+            class="item-input"
           />
         </form>
       </li>
@@ -28,7 +46,7 @@ export default {
   name: "TodoList",
 
   props: {
-    name: { type: String },
+    name: { type: String, default: "New todo list" },
     list: {
       type: Array,
       default() {
@@ -39,7 +57,9 @@ export default {
 
   data() {
     return {
-      newTask: ""
+      newTask: "",
+      heading: this.name,
+      showHeadingInput: false
     };
   },
 

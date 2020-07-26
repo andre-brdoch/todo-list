@@ -13,12 +13,14 @@
             class="setting-text"
             >Change Color</span
           >
-          <div
-            v-if="$store.state.colorPickerIsVisible"
-            class="color-picker-ctn"
-          >
-            <color-picker />
-          </div>
+          <transition name="color-picker">
+            <div
+              v-if="$store.state.colorPickerIsVisible"
+              class="color-picker-ctn"
+            >
+              <color-picker />
+            </div>
+          </transition>
         </li>
       </ul>
     </div>
@@ -117,5 +119,16 @@ export default {
 }
 .color-picker-ctn {
   margin-top: 0.75rem;
+
+  &.color-picker-enter-active,
+  &.color-picker-leave-active {
+    transition: all 0.2s ease-out;
+    transition-property: opacity, transform;
+  }
+  &.color-picker-enter,
+  &.color-picker-leave-to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
 }
 </style>

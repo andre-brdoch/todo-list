@@ -3,7 +3,7 @@
     <ul class="list">
       <li class="setting">
         <span
-          @click="$store.commit('toggleColorPickerVisibility')"
+          @click.stop="$store.commit('toggleColorPickerVisibility')"
           class="setting-text"
           >Change Color</span
         >

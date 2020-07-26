@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="$store.state.colorPickerIsVisible" class="color-picker">
+  <ul v-if="isVisible" class="color-picker">
     <li
       v-for="color in colors"
       :key="color"
@@ -22,10 +22,32 @@ export default {
     };
   },
 
+  computed: {
+    isVisible() {
+      return this.$store.state.colorPickerIsVisible;
+    }
+  },
+
+  watch: {
+    isVisible(val) {
+      if (!val) return;
+      document.addEventListener("click", this.outsideClickListener);
+    }
+  },
+
   methods: {
     changeColor(color) {
       this.$store.commit("setColor", color);
       this.$store.commit("toggleColorPickerVisibility");
+    },
+    outsideClickListener(e) {
+      if (!this.$el.contains(e.target)) {
+        this.$store.commit("hideColorPicker");
+        this.removeClickListener();
+      }
+    },
+    removeClickListener() {
+      document.removeEventListener("click", this.outsideClickListener);
     }
   }
 };

@@ -29,6 +29,9 @@ const mutations = {
   },
   toggleColorPickerVisibility(state) {
     state.colorPickerIsVisible = !state.colorPickerIsVisible;
+  },
+  hideColorPicker(state) {
+    state.colorPickerIsVisible = false;
   }
 };
 

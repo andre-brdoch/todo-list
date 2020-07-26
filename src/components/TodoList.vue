@@ -1,27 +1,6 @@
 <template>
   <article class="todo">
-    <header class="header">
-      <form
-        v-show="headingInputIsVisible"
-        @submit.prevent="updateHeading"
-        class="heading-form"
-      >
-        <input
-          v-model="heading"
-          @blur="updateHeading"
-          ref="headingInput"
-          class="heading-input"
-        />
-      </form>
-      <h3
-        v-show="!headingInputIsVisible"
-        @click.stop="showHeadingInput"
-        @focus.stop="showHeadingInput"
-        class="heading"
-      >
-        {{ heading }}
-      </h3>
-    </header>
+    <todo-heading :name="name"></todo-heading>
     <ul class="list">
       <li v-for="(item, i) in list" :key="item.text" class="task">
         <input type="checkbox" :id="item.text" class="checkbox" />
@@ -43,8 +22,12 @@
 </template>
 
 <script>
+import TodoHeading from "./TodoHeading.vue";
+
 export default {
   name: "TodoList",
+
+  components: { TodoHeading },
 
   props: {
     name: { type: String, default: "New todo list" },
@@ -58,9 +41,7 @@ export default {
 
   data() {
     return {
-      newTask: "",
-      heading: this.name,
-      headingInputIsVisible: false
+      newTask: ""
     };
   },
 
@@ -73,22 +54,6 @@ export default {
     },
     deleteItem(i) {
       this.list.splice(i, 1);
-    },
-    updateHeading() {
-      this.hideHeadingInput();
-    },
-    showHeadingInput() {
-      const { headingInput } = this.$refs;
-      this.headingInputIsVisible = true;
-      // setTimeout to make it work on FF
-      setTimeout(() => {
-        headingInput.focus();
-        headingInput.select();
-        headingInput.setSelectionRange(0, headingInput.value.length);
-      }, 0);
-    },
-    hideHeadingInput() {
-      this.headingInputIsVisible = false;
     }
   }
 };
@@ -101,14 +66,7 @@ export default {
   border-radius: 3px;
   max-width: 40rem;
 }
-.header {
-  margin-bottom: 1.5rem;
-}
-.heading {
-  font-size: 2rem;
-  margin: 0;
-  padding: 0;
-}
+
 .list {
   list-style: none;
   margin: 0;

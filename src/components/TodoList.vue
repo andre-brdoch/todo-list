@@ -1,5 +1,5 @@
 <template>
-  <CardComponent color="#fad872">
+  <CardComponent :color="color">
     <todo-heading :name="name"></todo-heading>
     <ul class="list">
       <li v-for="(item, i) in list" :key="item.text" class="task">
@@ -18,17 +18,19 @@
         </form>
       </li>
     </ul>
+    <TodoFooter v-on:color-change="changeColor"></TodoFooter>
   </CardComponent>
 </template>
 
 <script>
 import CardComponent from "./CardComponent.vue";
+import TodoFooter from "./TodoFooter.vue";
 import TodoHeading from "./TodoHeading.vue";
 
 export default {
   name: "TodoList",
 
-  components: { CardComponent, TodoHeading },
+  components: { CardComponent, TodoFooter, TodoHeading },
 
   props: {
     name: { type: String, default: "" },
@@ -42,7 +44,8 @@ export default {
 
   data() {
     return {
-      newTask: ""
+      newTask: "",
+      color: "yellow"
     };
   },
 
@@ -55,6 +58,9 @@ export default {
     },
     deleteItem(i) {
       this.list.splice(i, 1);
+    },
+    changeColor(color) {
+      this.color = color;
     }
   }
 };

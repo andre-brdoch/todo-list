@@ -1,14 +1,13 @@
 <template>
-  <div v-if="areOpen" class="list-settings">
+  <div v-if="$store.state.settingsAreOpen" class="list-settings">
     <ul class="list">
       <li class="setting">
-        <span @click.stop="toggleColorPicker" class="setting-text"
+        <span
+          @click.stop="$store.commit('toggleColorPickerVisibility')"
+          class="setting-text"
           >Change Color</span
         >
-        <color-picker
-          v-if="colorPickerIsVisible"
-          v-on:color-change="handleColorChange"
-        />
+        <color-picker />
       </li>
     </ul>
   </div>
@@ -16,35 +15,11 @@
 
 <script>
 import ColorPicker from "components/ColorPicker.vue";
-import colorsIcon from "icons/colors.svg";
 
 export default {
   name: "ListSettings",
 
-  components: { ColorPicker },
-
-  data() {
-    return {
-      colorPickerIsVisible: false,
-      colorsIcon
-    };
-  },
-
-  computed: {
-    areOpen() {
-      return this.$store.state.settingsAreOpen;
-    }
-  },
-
-  methods: {
-    toggleColorPicker() {
-      this.colorPickerIsVisible = !this.colorPickerIsVisible;
-    },
-    handleColorChange(color) {
-      this.$emit("color-change", color);
-      this.colorPickerIsVisible = false;
-    }
-  }
+  components: { ColorPicker }
 };
 </script>
 

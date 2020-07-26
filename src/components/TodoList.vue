@@ -1,5 +1,5 @@
 <template>
-  <CardComponent :color="color">
+  <CardComponent :color="$store.state.color">
     <header class="header">
       <todo-heading :name="name"></todo-heading>
       <div class="settings-wrapper">
@@ -10,7 +10,7 @@
           alt="open settings"
         />
         <div class="settings">
-          <list-settings v-on:color-change="changeColor" />
+          <list-settings />
         </div>
       </div>
     </header>
@@ -43,9 +43,9 @@
 import CardComponent from "components/CardComponent.vue";
 import ListSettings from "components/ListSettings.vue";
 import TodoHeading from "components/TodoHeading.vue";
-import { colors } from "../colors";
 import closeIcon from "icons/close.svg";
 import settingsIcon from "icons/options_hori.svg";
+import clonedeep from "lodash/clonedeep";
 import Vue from "vue";
 import Vuex from "vuex";
 import store from "store/todo-list";
@@ -70,13 +70,14 @@ export default {
   data() {
     return {
       newTask: "",
-      color: colors[0],
       closeIcon,
       settingsIcon
     };
   },
 
-  store: new Vuex.Store(store),
+  beforeCreate() {
+    this.$store = new Vuex.Store(clonedeep(store));
+  },
 
   methods: {
     addItem() {
@@ -87,9 +88,6 @@ export default {
     },
     deleteItem(i) {
       this.list.splice(i, 1);
-    },
-    changeColor(color) {
-      this.color = color;
     }
   }
 };

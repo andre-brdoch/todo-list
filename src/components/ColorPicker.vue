@@ -1,5 +1,5 @@
 <template>
-  <ul class="color-picker">
+  <ul v-if="$store.state.colorPickerIsVisible" class="color-picker">
     <li
       v-for="color in colors"
       :key="color"
@@ -24,7 +24,8 @@ export default {
 
   methods: {
     changeColor(color) {
-      this.$emit("color-change", color);
+      this.$store.commit("setColor", color);
+      this.$store.commit("toggleColorPickerVisibility");
     }
   }
 };

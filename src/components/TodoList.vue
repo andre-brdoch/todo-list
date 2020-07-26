@@ -4,8 +4,9 @@
       <h3 class="heading">{{ name }}</h3>
     </header>
     <ul class="list">
-      <li v-for="(item, i) in list" :key="item.text + i" class="task">
-        <span>{{ item.text }}</span>
+      <li v-for="(item, i) in list" :key="item.text" class="task">
+        <input type="checkbox" :id="item.text" class="checkbox" />
+        <label :for="item.text">{{ item.text }}</label>
         <span @click.stop="deleteItem(i)" class="delete-item-btn">x</span>
       </li>
       <li class="task create-task">

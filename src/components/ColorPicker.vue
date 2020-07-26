@@ -11,12 +11,14 @@
 </template>
 
 <script>
+import { colors } from "../colors";
+
 export default {
   name: "ColorPicker",
 
   data() {
     return {
-      colors: ["#ffb900", "#f7630c", "#e81123", "#0078d7", "#107c10", "#881798"]
+      colors
     };
   },
 

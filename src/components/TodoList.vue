@@ -26,6 +26,7 @@
 import CardComponent from "./CardComponent.vue";
 import TodoFooter from "./TodoFooter.vue";
 import TodoHeading from "./TodoHeading.vue";
+import { colors } from "../colors";
 
 export default {
   name: "TodoList",
@@ -45,7 +46,7 @@ export default {
   data() {
     return {
       newTask: "",
-      color: "yellow"
+      color: colors[0]
     };
   },
 

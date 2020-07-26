@@ -54,13 +54,36 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.list-settings {
+  position: relative;
+
+  &:after {
+    // triangle shape
+    $_size: 6px;
+
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: $_size solid transparent;
+    border-right: $_size solid transparent;
+    border-bottom: $_size * 2 solid white;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
 .list {
   list-style: none;
   margin: 0;
   padding: 1.5rem;
   background-color: white;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.07);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+.setting:not(:last-child) {
+  margin-bottom: 0.75rem;
 }
 .setting-text {
   white-space: nowrap;

@@ -44,13 +44,15 @@ $_iconSize: 2rem;
   position: relative;
 }
 .settings-btn {
+  display: block;
   width: $_iconSize;
   cursor: pointer;
 }
 .settings {
   position: absolute;
   z-index: 9999;
-  top: $_iconSize + 1rem;
-  right: 0;
+  top: $_iconSize + 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

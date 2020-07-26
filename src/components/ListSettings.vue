@@ -1,23 +1,28 @@
 <template>
-  <div v-if="isVisible" class="list-settings">
-    <ul class="list">
-      <li class="setting">
-        <span @click="$store.commit('deleteList')" class="setting-text"
-          >Delete list</span
-        >
-      </li>
-      <li class="setting">
-        <span
-          @click.stop="$store.commit('toggleColorPickerVisibility')"
-          class="setting-text"
-          >Change Color</span
-        >
-        <div v-if="$store.state.colorPickerIsVisible" class="color-picker-ctn">
-          <color-picker />
-        </div>
-      </li>
-    </ul>
-  </div>
+  <transition name="settings">
+    <div v-if="isVisible" class="list-settings">
+      <ul class="list">
+        <li class="setting">
+          <span @click="$store.commit('deleteList')" class="setting-text"
+            >Delete list</span
+          >
+        </li>
+        <li class="setting">
+          <span
+            @click.stop="$store.commit('toggleColorPickerVisibility')"
+            class="setting-text"
+            >Change Color</span
+          >
+          <div
+            v-if="$store.state.colorPickerIsVisible"
+            class="color-picker-ctn"
+          >
+            <color-picker />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -58,6 +63,23 @@ export default {
 <style scoped lang="scss">
 .list-settings {
   position: relative;
+
+  &.settings-enter-active,
+  &.settings-leave-active {
+    transition: all 0.2s ease-out;
+    transition-property: opacity, transform;
+  }
+  &.settings-enter {
+    opacity: 0;
+    transform: translate(-3px, 5px) scale(0.95);
+  }
+  &.settings-leave-active {
+    transition-timing-function: ease;
+  }
+  &.settings-leave-to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
 
   &:after {
     // triangle shape

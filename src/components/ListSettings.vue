@@ -23,15 +23,17 @@ export default {
 
   components: { ColorPicker },
 
-  props: {
-    areOpen: { type: Boolean, default: false }
-  },
-
   data() {
     return {
       colorPickerIsVisible: false,
       colorsIcon
     };
+  },
+
+  computed: {
+    areOpen() {
+      return this.$store.state.settingsAreOpen;
+    }
   },
 
   methods: {

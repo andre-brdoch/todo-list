@@ -4,16 +4,13 @@
       <todo-heading :name="name"></todo-heading>
       <div class="settings-wrapper">
         <img
-          @click.stop="toggleSettings"
+          @click.stop="$store.commit('toggleSettings')"
           class="settings-btn"
           :src="settingsIcon"
           alt="open settings"
         />
         <div class="settings">
-          <list-settings
-            v-on:color-change="changeColor"
-            :areOpen="settingsAreOpen"
-          />
+          <list-settings v-on:color-change="changeColor" />
         </div>
       </div>
     </header>
@@ -49,6 +46,11 @@ import TodoHeading from "components/TodoHeading.vue";
 import { colors } from "../colors";
 import closeIcon from "icons/close.svg";
 import settingsIcon from "icons/options_hori.svg";
+import Vue from "vue";
+import Vuex from "vuex";
+import store from "store/todo-list";
+
+Vue.use(Vuex);
 
 export default {
   name: "TodoList",
@@ -69,11 +71,12 @@ export default {
     return {
       newTask: "",
       color: colors[0],
-      settingsAreOpen: false,
       closeIcon,
       settingsIcon
     };
   },
+
+  store: new Vuex.Store(store),
 
   methods: {
     addItem() {
@@ -87,9 +90,6 @@ export default {
     },
     changeColor(color) {
       this.color = color;
-    },
-    toggleSettings() {
-      this.settingsAreOpen = !this.settingsAreOpen;
     }
   }
 };

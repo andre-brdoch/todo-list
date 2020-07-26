@@ -14,6 +14,7 @@ module.exports = {
     alias: {
       components: path.resolve(__dirname, "src/components"),
       icons: path.resolve(__dirname, "assets/icons"),
+      store: path.resolve(__dirname, "src/store"),
       vue: "vue/dist/vue.esm.js"
     }
   },

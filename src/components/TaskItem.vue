@@ -43,7 +43,9 @@ export default {
   padding: 0;
 }
 .task-text {
-  font-size: 1.6rem;
+  font-family: $font-family;
+  font-size: $font-size-task;
+  color: $font-color-task;
   cursor: pointer;
 }
 .delete-item-btn {

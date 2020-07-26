@@ -1,5 +1,7 @@
+@import "../assets/scss/globals";
+
 html {
-  font-family: 'Open Sans', sans-serif;
+  font-family: $font-family;
   // 10px
   font-size: 62.5%;
 }

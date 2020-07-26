@@ -2,7 +2,7 @@
   <div class="heading-ctn">
     <form v-show="inputIsVisible" @submit.prevent="updateHeading" class="form">
       <input
-        v-model="heading"
+        v-model="newHeading"
         @blur="updateHeading"
         ref="input"
         class="input"
@@ -21,24 +21,26 @@
 
 <script>
 export default {
-  name: "TodoHeading",
-
-  props: {
-    name: { type: String, default: "New todo list" }
-  },
-
   data() {
     return {
-      heading: this.name,
-      inputIsVisible: false
+      inputIsVisible: false,
+      newHeading: ""
     };
+  },
+
+  computed: {
+    heading() {
+      return this.$store.state.name;
+    }
   },
 
   methods: {
     updateHeading() {
+      this.$store.commit("setName", this.newHeading);
       this.hideInput();
     },
     showInput() {
+      this.newHeading = this.heading;
       const { input } = this.$refs;
       this.inputIsVisible = true;
       // setTimeout to make it work on FF

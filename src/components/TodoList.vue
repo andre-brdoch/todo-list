@@ -1,19 +1,6 @@
 <template>
   <CardComponent :color="$store.state.color">
-    <header class="header">
-      <todo-heading :name="name"></todo-heading>
-      <div class="settings-wrapper">
-        <img
-          @click.stop="$store.commit('toggleSettings')"
-          class="settings-btn"
-          :src="settingsIcon"
-          alt="open settings"
-        />
-        <div class="settings">
-          <list-settings />
-        </div>
-      </div>
-    </header>
+    <TodoHeader />
     <ul class="list">
       <li v-for="(item, i) in list" :key="item.text" class="task-ctn">
         <input type="checkbox" :id="item.text" class="checkbox" />
@@ -41,10 +28,8 @@
 
 <script>
 import CardComponent from "components/CardComponent.vue";
-import ListSettings from "components/ListSettings.vue";
-import TodoHeading from "components/TodoHeading.vue";
+import TodoHeader from "components/TodoHeader.vue";
 import closeIcon from "icons/close.svg";
-import settingsIcon from "icons/options_hori.svg";
 import clonedeep from "lodash/clonedeep";
 import Vue from "vue";
 import Vuex from "vuex";
@@ -53,9 +38,7 @@ import store from "store/todo-list";
 Vue.use(Vuex);
 
 export default {
-  name: "TodoList",
-
-  components: { CardComponent, ListSettings, TodoHeading },
+  components: { CardComponent, TodoHeader },
 
   props: {
     name: { type: String, default: "" },
@@ -70,13 +53,16 @@ export default {
   data() {
     return {
       newTask: "",
-      closeIcon,
-      settingsIcon
+      closeIcon
     };
   },
 
   beforeCreate() {
     this.$store = new Vuex.Store(clonedeep(store));
+  },
+
+  created() {
+    this.$store.commit("setName", this.name);
   },
 
   methods: {
@@ -94,26 +80,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$_iconSize: 2rem;
-
-.header {
-  display: grid;
-  grid-template-columns: 1fr 2rem;
-  grid-gap: 3rem;
-  padding-bottom: 1.5rem;
-}
-.settings-wrapper {
-  position: relative;
-}
-.settings-btn {
-  width: $_iconSize;
-  cursor: pointer;
-}
-.settings {
-  position: absolute;
-  top: $_iconSize + 1rem;
-  right: 0;
-}
 .list {
   list-style: none;
   margin: 0;

@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
   mode: "production",
@@ -10,7 +10,13 @@ module.exports = {
     filename: "app.[hash].js",
     path: path.resolve(__dirname, "dist")
   },
-  resolve: { alias: { vue: 'vue/dist/vue.esm.js' } },
+  resolve: {
+    alias: {
+      components: path.resolve(__dirname, "src/components"),
+      icons: path.resolve(__dirname, "assets/icons"),
+      vue: "vue/dist/vue.esm.js"
+    }
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template: "./src/index.html" }),
@@ -31,9 +37,9 @@ module.exports = {
         use: ["file-loader"]
       },
       {
-       test: /\.vue$/,
-       loader: 'vue-loader'
-     }
+        test: /\.vue$/,
+        loader: "vue-loader"
+      }
     ]
   }
 };

@@ -5,10 +5,11 @@
     </header>
     <ul class="list">
       <li v-for="(item, i) in list" :key="item.text + i" class="task">
-        {{ item.text }}
+        <span>{{ item.text }}</span>
+        <span @click.stop="deleteItem(i)" class="delete-item-btn">x</span>
       </li>
       <li class="task create-task">
-        <form @submit.prevent.stop="addTask" class="form">
+        <form @submit.prevent.stop="addItem" class="form">
           <input v-model="newTask" placeholder="Add new task" class="input" />
         </form>
       </li>
@@ -37,11 +38,14 @@ export default {
   },
 
   methods: {
-    addTask() {
+    addItem() {
       if (this.newTask.length === 0) return;
       const item = { text: this.newTask };
       this.list.push(item);
       this.newTask = "";
+    },
+    deleteItem(i) {
+      this.list.splice(i, 1);
     }
   }
 };

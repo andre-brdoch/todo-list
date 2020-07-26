@@ -12,7 +12,9 @@
           class="setting-text"
           >Change Color</span
         >
-        <color-picker />
+        <div v-if="$store.state.colorPickerIsVisible" class="color-picker-ctn">
+          <color-picker />
+        </div>
       </li>
     </ul>
   </div>
@@ -90,5 +92,8 @@ export default {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
+}
+.color-picker-ctn {
+  margin-top: 0.75rem;
 }
 </style>

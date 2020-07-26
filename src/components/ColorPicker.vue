@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="isVisible" class="color-picker">
+  <ul class="color-picker">
     <li
       v-for="color in colors"
       :key="color"
@@ -55,14 +55,13 @@ export default {
 
 <style scoped lang="scss">
 .color-picker {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1.5rem, 1fr));
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .color {
-  width: 1.5rem;
   cursor: pointer;
 
   &:after {

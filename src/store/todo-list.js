@@ -2,6 +2,7 @@ import { colors } from "../colors";
 
 const state = {
   name: "",
+  tasks: [],
   settingsAreOpen: false,
   color: colors[0],
   colorPickerIsVisible: false
@@ -10,6 +11,12 @@ const state = {
 const mutations = {
   setName(state, name) {
     state.name = name;
+  },
+  addTask(state, task) {
+    state.tasks.push(task);
+  },
+  deleteTaskAtIndex(state, i) {
+    state.tasks.splice(i, 1);
   },
   toggleSettings(state) {
     state.settingsAreOpen = !state.settingsAreOpen;

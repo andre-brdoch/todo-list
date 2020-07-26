@@ -21,6 +21,9 @@ const mutations = {
   toggleSettings(state) {
     state.settingsAreOpen = !state.settingsAreOpen;
   },
+  hideSettings(state) {
+    state.settingsAreOpen = false;
+  },
   setColor(state, color) {
     state.color = color;
   },

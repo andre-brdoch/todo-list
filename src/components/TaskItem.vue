@@ -3,7 +3,7 @@
     <input type="checkbox" :id="text" class="checkbox" />
     <label :for="text" class="task-text">{{ text }}</label>
     <img
-      @click.stop="$store.commit('deleteTaskAtIndex', i)"
+      @click="$store.commit('deleteTaskAtIndex', i)"
       class="delete-item-btn"
       :src="closeIcon"
       alt="delete task"

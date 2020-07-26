@@ -10,8 +10,8 @@
     </form>
     <h3
       v-show="!inputIsVisible"
-      @click.stop="showInput"
-      @focus.stop="showInput"
+      @click="showInput"
+      @focus="showInput"
       class="heading"
     >
       {{ heading }}

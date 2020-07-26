@@ -5,7 +5,7 @@
     </li>
     <li class="li">
       <CardComponent color="lightgrey">
-        <div @click.stop="addItem" class="add-btn">+</div>
+        <div @click="addItem" class="add-btn">+</div>
       </CardComponent>
     </li>
   </ul>

@@ -49,6 +49,7 @@ $_iconSize: 2rem;
 }
 .settings {
   position: absolute;
+  z-index: 9999;
   top: $_iconSize + 1rem;
   right: 0;
 }

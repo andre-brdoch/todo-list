@@ -1,9 +1,9 @@
 <template>
-  <div v-if="$store.state.settingsAreOpen" class="list-settings">
+  <div v-if="isVisible" class="list-settings">
     <ul class="list">
       <li class="setting">
         <span
-          @click.stop="$store.commit('toggleColorPickerVisibility')"
+          @click="$store.commit('toggleColorPickerVisibility')"
           class="setting-text"
           >Change Color</span
         >
@@ -19,7 +19,32 @@ import ColorPicker from "components/ColorPicker.vue";
 export default {
   name: "ListSettings",
 
-  components: { ColorPicker }
+  components: { ColorPicker },
+
+  computed: {
+    isVisible() {
+      return this.$store.state.settingsAreOpen;
+    }
+  },
+
+  watch: {
+    isVisible(val) {
+      if (!val) return;
+      document.addEventListener("click", this.outsideClickListener);
+    }
+  },
+
+  methods: {
+    outsideClickListener(e) {
+      if (!this.$el.contains(e.target)) {
+        this.$store.commit("hideSettings");
+        this.removeClickListener();
+      }
+    },
+    removeClickListener() {
+      document.removeEventListener("click", this.outsideClickListener);
+    }
+  }
 };
 </script>
 

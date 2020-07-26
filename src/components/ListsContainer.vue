@@ -28,6 +28,10 @@ export default {
     return { lists: [] };
   },
 
+  mounted() {
+    this.addItem();
+  },
+
   methods: {
     addItem() {
       this.lists.push({

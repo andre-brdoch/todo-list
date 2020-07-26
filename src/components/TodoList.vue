@@ -30,7 +30,7 @@ export default {
   components: { TodoHeading },
 
   props: {
-    name: { type: String, default: "New todo list" },
+    name: { type: String, default: "" },
     list: {
       type: Array,
       default() {

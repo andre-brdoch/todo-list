@@ -1,8 +1,8 @@
 import "./style.scss";
-import TodoList from './components/TodoList.vue';
-import Vue from 'vue';
+import ListsContainer from "./components/ListsContainer.vue";
+import Vue from "vue";
 
 new Vue({
-  el: '#app',
-  components: { 'todo-list': TodoList },
+  el: "#app",
+  components: { "lists-container": ListsContainer }
 });

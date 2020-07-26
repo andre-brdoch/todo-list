@@ -5,7 +5,7 @@
       <li v-for="(task, i) in tasks" :key="task.id" class="task-ctn">
         <TaskItem :text="task.text" :i="i" />
       </li>
-      <li class="task create-task">
+      <li class="task-ctn create-task">
         <AddTaskInput />
       </li>
     </ul>

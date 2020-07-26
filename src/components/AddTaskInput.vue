@@ -6,8 +6,9 @@
       placeholder="Add new task"
       :style="
         `
+        --background-color: ${backgroundColor};
+        --text-color: ${textColor};
         --border-color: ${borderColor};
-        --border-color-focus: ${borderColorFocus};
       `
       "
       class="input"
@@ -30,11 +31,14 @@ export default {
     color() {
       return this.$store.state.color;
     },
-    borderColor() {
-      return tinycolor(this.color).darken(25);
+    backgroundColor() {
+      return this.color;
     },
-    borderColorFocus() {
-      return "white";
+    borderColor() {
+      return tinycolor(this.color).lighten(15);
+    },
+    textColor() {
+      return tinycolor(this.color).darken(35);
     }
   },
 
@@ -54,24 +58,25 @@ export default {
 
 <style scoped lang="scss">
 .input {
-  padding: 0.75rem 1.5rem;
-  border-radius: 3px;
-  background-color: transparent;
+  padding: 0.75rem 0;
   font-family: $font-family;
   font-size: $font-size-task;
-  color: $font-color-task;
   transition: all 0.2s ease-in-out;
-  transition-property: border-color;
-  border: 2px solid var(--border-color);
-  border-style: inset;
+  transition-property: background-color, border-color, color;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: none;
+  border-bottom: 3px solid var(--border-color);
 
   &:focus {
     outline: none;
-    border-color: var(--border-color-focus);
   }
   &::placeholder {
-    color: $font-color-task;
-    opacity: 0.7;
+    color: var(--text-color);
+    opacity: 1;
+  }
+  &:focus::placeholder {
+    color: transparent;
   }
 }
 </style>

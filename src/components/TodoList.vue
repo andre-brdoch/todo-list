@@ -2,23 +2,24 @@
   <article class="todo">
     <header class="header">
       <form
-        v-if="showHeadingInput"
-        @submit.prevent="showHeadingInput = false"
+        v-show="headingInputIsVisible"
+        @submit.prevent="updateHeading"
         class="heading-form"
       >
         <input
           v-model="heading"
-          @blur="showHeadingInput = false"
+          @blur="updateHeading"
+          ref="headingInput"
           class="heading-input"
         />
       </form>
       <h3
-        v-else
-        @click.stop="showHeadingInput = true"
-        @focus.stop="showHeadingInput = true"
+        v-show="!headingInputIsVisible"
+        @click.stop="showHeadingInput"
+        @focus.stop="showHeadingInput"
         class="heading"
       >
-        {{ name }}
+        {{ heading }}
       </h3>
     </header>
     <ul class="list">
@@ -59,7 +60,7 @@ export default {
     return {
       newTask: "",
       heading: this.name,
-      showHeadingInput: false
+      headingInputIsVisible: false
     };
   },
 
@@ -72,6 +73,22 @@ export default {
     },
     deleteItem(i) {
       this.list.splice(i, 1);
+    },
+    updateHeading() {
+      this.hideHeadingInput();
+    },
+    showHeadingInput() {
+      const { headingInput } = this.$refs;
+      this.headingInputIsVisible = true;
+      // setTimeout to make it work on FF
+      setTimeout(() => {
+        headingInput.focus();
+        headingInput.select();
+        headingInput.setSelectionRange(0, headingInput.value.length);
+      }, 0);
+    },
+    hideHeadingInput() {
+      this.headingInputIsVisible = false;
     }
   }
 };

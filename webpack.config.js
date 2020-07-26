@@ -27,7 +27,17 @@ module.exports = {
     rules: [
       {
         test: /\.s[ac]ss$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+          {
+            loader: "sass-resources-loader",
+            options: {
+              resources: "./assets/scss/globals.scss"
+            }
+          }
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

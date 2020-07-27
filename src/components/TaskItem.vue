@@ -1,6 +1,6 @@
 <template>
   <div class="ctn">
-    <input type="checkbox" :id="text" class="checkbox" />
+    <CheckBox :id="text" />
     <label :for="text" :style="`color: ${textColor};`" class="task-text">{{
       text
     }}</label>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import CheckBox from "components/CheckBox.vue";
 import closeIcon from "icons/close.svg";
 import { darkenColor } from "utils/colors";
 
@@ -22,6 +23,8 @@ export default {
     text: { type: String, required: true },
     i: { type: Number, required: true }
   },
+
+  components: { CheckBox },
 
   data() {
     return {
@@ -41,7 +44,7 @@ export default {
 .ctn {
   display: grid;
   grid-template-columns: auto auto;
-  grid-gap: 0.75rem;
+  grid-gap: 1.5rem;
   align-items: center;
   justify-content: start;
   position: relative;

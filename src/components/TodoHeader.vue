@@ -2,11 +2,9 @@
   <header class="header">
     <TodoHeading />
     <div class="settings-wrapper">
-      <img
-        @click.stop="$store.commit('toggleSettings')"
-        class="settings-btn"
+      <IconButton
         :src="settingsIcon"
-        alt="open settings"
+        @click.native.stop="$store.commit('toggleSettings')"
       />
       <div class="settings">
         <ListSettings />
@@ -16,12 +14,13 @@
 </template>
 
 <script>
+import IconButton from "components/IconButton.vue";
 import ListSettings from "components/ListSettings.vue";
 import TodoHeading from "components/TodoHeading.vue";
 import settingsIcon from "icons/options_hori.svg";
 
 export default {
-  components: { ListSettings, TodoHeading },
+  components: { IconButton, ListSettings, TodoHeading },
 
   data() {
     return {
@@ -42,11 +41,6 @@ $_iconSize: 2rem;
 }
 .settings-wrapper {
   position: relative;
-}
-.settings-btn {
-  display: block;
-  width: $_iconSize;
-  cursor: pointer;
 }
 .settings {
   position: absolute;

@@ -4,17 +4,18 @@
     <label :for="text" :style="`color: ${textColor};`" class="task-text">{{
       text
     }}</label>
-    <img
-      @click="$store.commit('deleteTaskAtIndex', i)"
-      class="delete-item-btn"
-      :src="closeIcon"
-      alt="delete task"
-    />
+    <div class="delete-item-btn">
+      <IconButton
+        :src="closeIcon"
+        @click.native="$store.commit('deleteTaskAtIndex', i)"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import CheckBox from "components/CheckBox.vue";
+import IconButton from "components/IconButton.vue";
 import closeIcon from "icons/close.svg";
 import { darkenColor } from "utils/colors";
 
@@ -24,7 +25,7 @@ export default {
     i: { type: Number, required: true }
   },
 
-  components: { CheckBox },
+  components: { CheckBox, IconButton },
 
   data() {
     return {
@@ -66,8 +67,5 @@ export default {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  cursor: pointer;
-  width: 1.5rem;
-  padding: 2px;
 }
 </style>

@@ -1,14 +1,16 @@
 <template>
   <CardComponent :color="$store.state.color">
-    <TodoHeader />
-    <ul class="list">
-      <li v-for="(task, i) in tasks" :key="task.id" class="task-ctn">
-        <TaskItem :text="task.text" :i="i" />
-      </li>
-      <li class="task-ctn create-task">
-        <AddTaskInput />
-      </li>
-    </ul>
+    <div class="wrapper">
+      <TodoHeader />
+      <ul class="list">
+        <li v-for="(task, i) in tasks" :key="task.id" class="task-ctn">
+          <TaskItem :text="task.text" :i="i" />
+        </li>
+        <li class="task-ctn create-task">
+          <AddTaskInput />
+        </li>
+      </ul>
+    </div>
   </CardComponent>
 </template>
 
@@ -58,6 +60,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.wrapper {
+  padding: 1.5rem;
+}
 .list {
   list-style: none;
   margin: 0;
